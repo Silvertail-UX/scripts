@@ -60,7 +60,6 @@ if [ -s errores.txt ]; then
   echo -e "\t${redColour}[!]${endColour} Estos fueron los errores...${purpleColour}\n"
   cat errores.txt
   echo -e "${yellowColour}-------------------------------------------${endColour}"
-
 else
   rm errores.txt
 fi
