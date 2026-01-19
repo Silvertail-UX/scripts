@@ -24,9 +24,9 @@ function desordenar(){
   echo -en "\n${yellowColour}[?]${endColour} En qué directorio están los ficheros que se van a desordenar? ${purpleColour}(escribir directorio completo):${endColour}" && read dir
   tput civis
 
-  if [ -d $dir ]; then
+  if [ -d "$dir" ]; then
     cd $dir 2>/dev/null
-    command_status=$(echo $?)
+    command_status=$?
     echo -e "\n\t${turquoiseColour}[+]${endColour} Accediendo al directorio ${purpleColour}$dir${endColour}"
     if [ ! $command_status -eq 0 ]; then
       echo -e "\t${redColour}[!] Error: No se tienen los permisos necesarios para acceder al directorio ${purpleColour}$dir${endColour}" && tput cnorm && exit 1
@@ -54,7 +54,7 @@ function desordenar(){
     for ((i=1; i<=limit_file; i++)); do
       file="$(cat temp.txt | head -n$i | tail -n1)"
       name="$((RANDOM)).$file_type"
-      mv $file $name
+      mv -- "$file" "$name"
     done
     rm temp.txt
     echo -e "${turquoiseColour}\t[+]${endColour} Nombres cambiados ${blueColour}o.O)/${endColour}" && tput cnorm
@@ -71,9 +71,9 @@ function ordenar_nombre(){
   echo -en "\n${yellowColour}[?]${endColour} En qué directorio están los ficheros que se van a ordenar? ${purpleColour}(escribir directorio completo)${endColour}" && read dir
   tput civis
 
-  if [ -d $dir ]; then
+  if [ -d "$dir" ]; then
     cd $dir 2>/dev/null
-    command_status=$(echo $?)
+    command_status=$?
     echo -e "\n\t${turquoiseColour}[+]${endColour} Accediendo al directorio ${purpleColour}$dir${endColour}"
     if [ ! $command_status -eq 0 ]; then
       echo -e "\t${redColour}[!] Error: No se tienen los permisos necesarios para acceder al directorio ${purpleColour}$dir${endColour}" && tput cnorm && exit 1
@@ -138,4 +138,3 @@ elif [ $arg_value -eq 2 ]; then
 else
   help_panel
 fi
-
